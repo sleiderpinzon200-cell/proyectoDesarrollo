@@ -1,16 +1,15 @@
 const express = require('express');
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const router = express.Router();
 
-const usuario = { name: 'daniel', password: '1234' };
+const usuario = require('../models/user');
+
 let intentos = 0;
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.get('/iniciar', (req, res) => {
+router.get('/iniciar', (req, res) => {
     res.send(`
         <html>
             <body>
@@ -26,7 +25,7 @@ app.get('/iniciar', (req, res) => {
 });
 
 //validacion de datos
-app.post('/iniciar', (req, res) => {
+router.post('/iniciar', (req, res) => {
     const { name, password } = req.body;
 
     if (!name || !password) {
@@ -46,11 +45,4 @@ app.post('/iniciar', (req, res) => {
     return res.status(401).send(`Credenciales inválidas. Intento ${intentos} de 3.`);
 });
 
-
-
-
-app.use((req, res) => {
-    res.send('no se encontro la pagina');
-});
-app.listen(3000);
-console.log(`Server is running on port 3000`);
+module.exports = router;
