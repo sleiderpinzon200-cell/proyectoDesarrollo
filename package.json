@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "express": "^5.2.1"
-  }
-}
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon /src/index.js",
+  },
+  "author": "",
+  "license": "ISC",
+} 
